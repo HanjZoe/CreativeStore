@@ -1,0 +1,53 @@
+version: '3'
+
+networks:
+  creativestore:
+    name: creativestore
+
+services:
+  nginx:
+      image: nginx
+      container_name: nginx_store
+      volumes:
+      - ${NGINX_CONF}:/etc/nginx/nginx.conf
+      - ${NGINX_LOGS}:/var/log/nginx/
+      - ${NGINX_ROUTE_CONF}:/etc/nginx/conf.d/
+      - ${PROJECT_DERECTORY}:/var/www
+      ports:
+      - 8080:80
+      working_dir: /etc/nginx/
+      depends_on:
+      - phpmyadmin
+      - php
+      networks:
+      - creativestore
+  db: 
+      image: mariadb
+      container_name: db_store
+      environment:
+        MARIADB_USER: 1
+        MARIADB_PASSWORD: 1
+        MARIADB_ROOT_PASSWORD: 123
+      volumes:
+      - ${DB_PATH_HOST}:/var/lib/mysql
+      networks: 
+      - creativestore
+  phpmyadmin:
+    image: phpmyadmin
+    container_name: phpmyadmin_store
+    ports:
+      - 9080:80
+    environment:
+      - PMA_ARBITRARY=0
+      - PMA_HOST=db
+    depends_on:
+      - db
+    networks:
+      - creativestore
+  php: 
+    container_name: php_store
+    build: ./_docker/build/php/
+    volumes:
+      - ${PROJECT_DERECTORY}:/var/www
+    networks:
+      - creativestore
