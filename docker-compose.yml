@@ -9,10 +9,10 @@ services:
       image: nginx
       container_name: nginx_store
       volumes:
-      - ${NGINX_CONF}:/etc/nginx/nginx.conf
-      - ${NGINX_LOGS}:/var/log/nginx/
-      - ${NGINX_ROUTE_CONF}:/etc/nginx/conf.d/
-      - ${PROJECT_DERECTORY}:/var/www
+      - ./_docker/nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./_docker/nginx/logs:/var/log/nginx/
+      - ./_docker/nginx/conf.d/:/etc/nginx/conf.d/
+      - ./:/var/www
       ports:
       - 8080:80
       working_dir: /etc/nginx/
@@ -29,7 +29,7 @@ services:
         MARIADB_PASSWORD: 1
         MARIADB_ROOT_PASSWORD: 123
       volumes:
-      - ${DB_PATH_HOST}:/var/lib/mysql
+      - ./_docker/database:/var/lib/mysql
       networks: 
       - creativestore
   phpmyadmin:
@@ -48,6 +48,6 @@ services:
     container_name: php_store
     build: ./_docker/build/php/
     volumes:
-      - ${PROJECT_DERECTORY}:/var/www
+      - ./:/var/www
     networks:
       - creativestore
