@@ -21,7 +21,7 @@ services:
       - php
       networks:
       - creativestore
-  db: 
+  db:
       image: mariadb
       container_name: db_store
       environment:
@@ -30,7 +30,7 @@ services:
         MARIADB_ROOT_PASSWORD: 123
       volumes:
       - ./_docker/database:/var/lib/mysql
-      networks: 
+      networks:
       - creativestore
   phpmyadmin:
     image: phpmyadmin
@@ -44,10 +44,11 @@ services:
       - db
     networks:
       - creativestore
-  php: 
+  php:
     container_name: php_store
     build: ./_docker/build/php/
     volumes:
       - ./:/var/www
+    working_dir: /var/www/
     networks:
       - creativestore
