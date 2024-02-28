@@ -28,7 +28,7 @@
                         <div class="inner">
                             <h3>150</h3>
 
-                            <p>Заказы/p>
+                            <p>Заказы</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-bag"></i>
