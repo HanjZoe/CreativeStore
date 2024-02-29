@@ -31,6 +31,9 @@
                     </div>
                     <div class="form-group">
                         <input type="submit" class="btn btn-primary" value="Создать">
+                        @error('title')
+                        <div class="text-danger"> {{$message}}</div>
+                        @enderror
                     </div>
 
                 </form>

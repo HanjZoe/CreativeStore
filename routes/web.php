@@ -46,3 +46,13 @@ Route::group(['prefix' => 'colors', 'as' => 'color.'], function (){
     Route::get('/{color}/edit', \App\Http\Controllers\Color\EditController::class)->name('edit');
 });
 
+Route::group(['prefix' => 'users', 'as' => 'user.'], function (){
+    Route::get('/', \App\Http\Controllers\User\IndexController::class)->name('index');
+    Route::get('/create', \App\Http\Controllers\User\CreateController::class)->name('create');
+    Route::delete('/{user}/delete', \App\Http\Controllers\User\DeleteController::class)->name('delete');
+    Route::get('/{user}', \App\Http\Controllers\User\ShowController::class)->name('show');
+    Route::post('/store', \App\Http\Controllers\User\StoreController::class)->name('store');
+    Route::patch('/{user}/update', \App\Http\Controllers\User\UpdateController::class)->name('update');
+    Route::get('/{user}/edit', \App\Http\Controllers\User\EditController::class)->name('edit');
+});
+

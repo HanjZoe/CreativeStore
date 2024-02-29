@@ -28,6 +28,9 @@
                 @csrf
                     <div class="form-group">
                         <input type ="text" name="title" type="text" class="form-control" placeholder="Цвет">
+                        @error('title')
+                        <div class="text-danger"> {{$message}}</div>
+                        @enderror
                     </div>
 
                     <div class="form-group">
