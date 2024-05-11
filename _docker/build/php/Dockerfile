@@ -21,7 +21,9 @@ ENV COMPOSER_ALLOW_SUPERUSER=1
 RUN curl -sS https://getcomposer.org/installer | php -- \
     --filename=composer \
     --install-dir=/usr/local/bin
-
+RUN pecl install xdebug \
+    && docker-php-ext-enable xdebug
+ADD docker-php-ext-enable.ini /usr/local/etc/php/conf.d/docker-php-ext-enable.ini
 
 RUN useradd hanj
 USER hanj
